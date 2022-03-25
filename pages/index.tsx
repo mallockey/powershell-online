@@ -45,7 +45,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     setCommand(
-      "$MyLuckyNums = @(14,29,54,42) \n \rforeach($Num in $MyLuckyNums) {\n\t Write-Host $Num\n}"
+      "$MyLuckyNums = @(14,29,54,42) \n \r$MyLuckyNums | ForEach-Object { $_ }"
     );
   }, []);
 

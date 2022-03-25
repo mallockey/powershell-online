@@ -5,6 +5,8 @@ require("codemirror/theme/material.css");
 
 if (typeof window !== "undefined" && typeof window.navigator !== "undefined") {
   require("codemirror/mode/powershell/powershell.js");
+  require("codemirror/addon/edit/closebrackets");
+  require("codemirror/addon/hint/show-hint");
 }
 
 interface CodeEditorProps {
@@ -29,7 +31,13 @@ const CodeEditor: FC<CodeEditorProps> = ({ command, setCommand }) => {
           theme: "material",
           lineNumbers: true,
           spellCheck: true,
+          indentWithTabs: true,
           autoCorrect: true,
+          autoCloseBrackets: true,
+          autoIndent: true,
+          autoComplete: true,
+          showHint: true,
+          Tab: "autocomplete",
         }}
         onChange={(editor, data, value: string) => {
           setCommand(value);
