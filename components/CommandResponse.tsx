@@ -12,7 +12,7 @@ const CommandResponse: FC<CommandResponseProps> = ({
   commandResponse,
 }) => {
   return (
-    <div className="w-full mb-6 ">
+    <div className="mt-2  w-full mb-6 h-full ">
       <div className="text-white ml-2 justify-center rounded-tl-md rounded-tr-md flex w-16 bg-vscode-dark">
         <span>Output</span>
       </div>

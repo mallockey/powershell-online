@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import type { NextPage } from "next";
 import { CommandResponseType } from "../components/types";
+import { useWindowWidth } from "@react-hook/window-size";
 
 import Split from "react-split";
 import Axios from "axios";
@@ -11,6 +12,7 @@ import CommandResponse from "../components/CommandResponse";
 import Head from "next/head";
 
 const Home: NextPage = () => {
+  const windowWidth = useWindowWidth();
   const [loading, setLoading] = useState(false);
   const [command, setCommand] = useState<string | undefined>("");
   const [commandResponse, setCommandResponse] = useState<CommandResponseType>({
@@ -57,7 +59,12 @@ const Home: NextPage = () => {
         <title>{loading ? "Running command..." : "PowerShell Online"}</title>
       </Head>
       <Header loading={loading} handleSendCommand={handleSendCommand} />
-      <Split className="flex h-full shadow-xl  mt-4 mr-4 ml-4 " gutterSize={10}>
+      <Split
+        className=" hover:col-resize flex sm:flex-row  flex-col h-full shadow-xl  mt-4 mr-4 ml-4"
+        gutterSize={10}
+        direction={windowWidth < 600 ? "vertical" : "horizontal"}
+        cursor={windowWidth < 600 ? "row-resize" : "col-resize"}
+      >
         <CodeEditor command={command} setCommand={setCommand} />
         <CommandResponse loading={loading} commandResponse={commandResponse} />
       </Split>

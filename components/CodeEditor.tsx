@@ -10,7 +10,7 @@ interface CodeEditorProps {
 
 const CodeEditor: FC<CodeEditorProps> = ({ setCommand, command }) => {
   return (
-    <div className="pr-2 overflow-hidden">
+    <div className="mb-2 sm:mb-0 pr-2 ">
       <div className="flex">
         <div className="text-white flex pl-2 pr-2 rounded-tr-md rounded-tl-md  bg-vscode-dark pb-2">
           <Image src="/powershell-icon.svg" width={20} height={20} alt="" />
