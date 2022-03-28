@@ -1,47 +1,39 @@
 import React, { FC } from "react";
-import { UnControlled as CodeMirror } from "react-codemirror2";
-require("codemirror/lib/codemirror.css");
-require("codemirror/theme/material.css");
-
-if (typeof window !== "undefined" && typeof window.navigator !== "undefined") {
-  require("codemirror/mode/powershell/powershell.js");
-  require("codemirror/addon/edit/closebrackets");
-  require("codemirror/addon/hint/show-hint");
-}
+import Image from "next/image";
+import Editor from "@monaco-editor/react";
+import ReactLoading from "react-loading";
 
 interface CodeEditorProps {
-  command: string;
   setCommand: (value: string) => void;
+  command: string | undefined;
 }
 
-const CodeEditor: FC<CodeEditorProps> = ({ command, setCommand }) => {
+const CodeEditor: FC<CodeEditorProps> = ({ setCommand, command }) => {
   return (
     <div className="pr-2 overflow-hidden">
       <div className="flex">
-        <span className="text-white pl-2 pr-2 rounded-tr-md rounded-tl-md font-bold bg-gray-700 border-b">
-          Editor
-        </span>
+        <div className="text-white flex pl-2 pr-2 rounded-tr-md rounded-tl-md  bg-vscode-dark pb-2">
+          <Image src="/powershell-icon.svg" width={20} height={20} alt="" />
+          <span className="text-white ml-2"> New-Script.ps1</span>
+        </div>
       </div>
-      <CodeMirror
-        className="CodeMirror"
-        autoCursor={false}
-        value={command}
-        options={{
-          mode: "powershell",
-          theme: "material",
-          lineNumbers: true,
-          spellCheck: true,
-          indentWithTabs: true,
-          autoCorrect: true,
-          autoCloseBrackets: true,
-          autoIndent: true,
-          autoComplete: true,
-          showHint: true,
-          Tab: "autocomplete",
+      <Editor
+        onChange={(value: string | undefined) => {
+          if (typeof value === "string") {
+            setCommand(value);
+          }
         }}
-        onChange={(editor, data, value: string) => {
-          setCommand(value);
-        }}
+        theme="vs-dark"
+        language="powershell"
+        defaultValue={command}
+        loading={
+          <ReactLoading
+            type="spin"
+            color="rgba(59, 130, 246)"
+            height={100}
+            width={50}
+          />
+        }
       />
     </div>
   );

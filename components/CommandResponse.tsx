@@ -12,11 +12,11 @@ const CommandResponse: FC<CommandResponseProps> = ({
   commandResponse,
 }) => {
   return (
-    <div className="w-full mb-6">
-      <div className="text-white ml-2 justify-center rounded-tl-md rounded-tr-md flex border-b w-16 bg-gray-700">
-        <span className="font-bold ">Output</span>
+    <div className="w-full mb-6 ">
+      <div className="text-white ml-2 justify-center rounded-tl-md rounded-tr-md flex w-16 bg-vscode-dark">
+        <span>Output</span>
       </div>
-      <div className="bg-gray-700 h-full ml-2 rounded-tr-md overflow-y-auto">
+      <div className="bg-vscode-dark h-full ml-2 rounded-tr-md overflow-y-auto">
         {loading ? (
           <div className="h-full w-full flex justify-center items-center">
             <ReactLoading

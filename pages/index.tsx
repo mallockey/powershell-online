@@ -12,7 +12,7 @@ import Head from "next/head";
 
 const Home: NextPage = () => {
   const [loading, setLoading] = useState(false);
-  const [command, setCommand] = useState("");
+  const [command, setCommand] = useState<string | undefined>("");
   const [commandResponse, setCommandResponse] = useState<CommandResponseType>({
     error: false,
     commandOutput: "",
@@ -27,6 +27,7 @@ const Home: NextPage = () => {
       setLoading(false);
     } else {
       try {
+        if (!command) return;
         setLoading(true);
         const { data } = await Axios.post(
           "https://powershell-repl.herokuapp.com/send-command",
@@ -53,13 +54,10 @@ const Home: NextPage = () => {
     <div className="flex-col h-5/6">
       <Head>
         <link rel="icon" href="/powershell-icon.svg" />
-        <title>PowerShell Online</title>
+        <title>{loading ? "Running command..." : "PowerShell Online"}</title>
       </Head>
       <Header loading={loading} handleSendCommand={handleSendCommand} />
-      <Split
-        className="flex h-full shadow-xl bg-black mt-4 mr-4 ml-4 "
-        gutterSize={5}
-      >
+      <Split className="flex h-full shadow-xl  mt-4 mr-4 ml-4 " gutterSize={10}>
         <CodeEditor command={command} setCommand={setCommand} />
         <CommandResponse loading={loading} commandResponse={commandResponse} />
       </Split>
