@@ -34,6 +34,11 @@ const CodeEditor: FC<CodeEditorProps> = ({ setCommand, command }) => {
             width={50}
           />
         }
+        options={{
+          minimap: {
+            enabled: false,
+          },
+        }}
       />
     </div>
   );

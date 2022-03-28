@@ -46,7 +46,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     setCommand(
-      "$MyLuckyNums = @(14,29,54,42) \n \r$MyLuckyNums | ForEach-Object { $_ }"
+      `$RedditRequest = Invoke-RestMethod -Uri https://www.reddit.com/r/powershell/hot/.json\n$RedditLinks = $RedditRequest.data.children.data\n\n$RedditLinks | Foreach-Object {	$_.Title }`
     );
   }, []);
 
